@@ -1,10 +1,14 @@
 import React from 'react'
-import './App.css'
+import './index.css'
+import Header from './components/Header'
+import Body from './components/Body'
 
 const App = () => {
   return (
     <>
-      <p className='text-3xl font-bold'>namec</p>
+  
+    <Header/>
+    <Body/>
     </>
   )
 }
