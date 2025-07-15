@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { YOUTUBE_VIDEO_API } from '../utils/contants'
+import VideoCard from './VideoCard'
 
 const VideoContainer = () => {
+  const [videos,setVideos] = useState([])
+
   useEffect(()=>{
     getVideos();
   },[])
@@ -10,17 +13,16 @@ const VideoContainer = () => {
       console.log("Fetching from:", YOUTUBE_VIDEO_API);
       const res = await fetch(YOUTUBE_VIDEO_API);
       const json = await res.json();
-      console.log("Fetched JSON:", json);
-      if (json.error) {
-        console.error("YouTube API Error:", json.error);
-      }
+      console.log("Fetched JSON:", json.items);
+      setVideos(json.items)
     } catch (err) {
       console.error("Fetch failed:", err);
     }
   };
   return (
-    <>
-    </>
+    <div>
+    <VideoCard info={videos[0]}/>
+    </div>
   )
 }
 
