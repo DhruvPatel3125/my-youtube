@@ -1,0 +1,1 @@
+export const YOUTUBE_VIDEO_API = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&chart=mostPopular&maxResults=12&regionCode=US&key=${process.env.REACT_APP_GOOGLE_API_KEY}`;
