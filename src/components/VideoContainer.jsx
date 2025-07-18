@@ -14,7 +14,6 @@ const VideoContainer = () => {
       console.log("Fetching from:", YOUTUBE_VIDEO_API);
       const res = await fetch(YOUTUBE_VIDEO_API);
       const json = await res.json();
-      console.log("Fetched JSON:", json.items);
       setVideos(json.items);
     } catch (err) {
       console.error("Fetch failed:", err);
@@ -23,8 +22,8 @@ const VideoContainer = () => {
   return (
     <div className="flex flex-wrap">
       {videos.map((video) => (
-        <Link to={"/watch?v=" + video.id}>
-          <VideoCard key={video.id} info={video} />
+        <Link key={video.id} to={"/watch?v=" + video.id}>
+          <VideoCard info={video} />
         </Link>
       ))}
     </div>
