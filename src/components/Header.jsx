@@ -77,7 +77,7 @@ const getSearchSuggestions = async () => {
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
         />
         <button className="border border-gray-400 p-2 rounded-r-full bg-gray-100">
-          Search
+        🔍
         </button>
 
         {/* Suggestions Dropdown */}
