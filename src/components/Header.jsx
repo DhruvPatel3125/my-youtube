@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { toggleMenu } from "../utils/appSlice";
 import { useDispatch } from "react-redux";
 import { YOUTUBE_SEARCH_API } from "../utils/contants";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("")
 
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
@@ -44,6 +46,12 @@ const getSearchSuggestions = async () => {
     setShowSuggestions(false);
   }
 };
+const handleSearch = () =>{
+  if(searchQuery.trim()){
+    navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    setShowSuggestions(false);
+  }
+}
 
 
   return (
@@ -75,8 +83,12 @@ const getSearchSuggestions = async () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+          onKeyDown={(e)=>{
+            if(e.key === "Enter") handleSearch();
+            }
+          }
         />
-        <button className="border border-gray-400 p-2 rounded-r-full bg-gray-100">
+        <button className="border border-gray-400 p-2 rounded-r-full bg-gray-100" onClick={handleSearch}>
         🔍
         </button>
 

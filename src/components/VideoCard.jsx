@@ -1,19 +1,26 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const VideoCard = ({info}) => {
-    if (!info || !info.snippet || !info.statistics) return null;
-    const {snippet,statistics} = info;
-    const {channelTitle,title,thumbnails} = snippet;
+const VideoCard = ({ video }) => {
+  if (!video || !video.snippet) return null;
+  const { snippet } = video;
+  const { channelTitle, title, thumbnails } = snippet;
+  // statistics may not be present in search results
+  const viewCount = video.statistics ? video.statistics.viewCount : null;
+  const videoId = video.id.videoId || video.id;
+
   return (
-    <div className='p-2 m-2 w-72 shadow-lg'>
-        <img className='rouded-lg' alt='video' src={thumbnails.medium.url} />
+    <Link to={`/watch?v=${videoId}`} className="block">
+      <div className='p-2 m-2 w-72 shadow-lg'>
+        <img className='rounded-lg' alt='video' src={thumbnails.medium.url} />
         <ul>
-            <li className='font-bold py-2'>{title}</li>
-            <li>{channelTitle}</li>
-            <li>{statistics.viewCount} views</li>
+          <li className='font-bold py-2'>{title}</li>
+          <li>{channelTitle}</li>
+          {viewCount && <li>{viewCount} views</li>}
         </ul>
-    </div>
-  )
-}
+      </div>
+    </Link>
+  );
+};
 
-export default VideoCard
+export default VideoCard;
