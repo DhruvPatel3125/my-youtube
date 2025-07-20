@@ -55,18 +55,18 @@ const handleSearch = () =>{
 
 
   return (
-    <div className="grid grid-flow-col p-5 m-2 shadow-lg bg-white z-50 relative">
+    <header className="sticky top-0 z-50 bg-white shadow flex items-center justify-between px-4 py-2 w-full">
       {/* Left */}
-      <div className="flex col-span-1 items-center">
+      <div className="flex items-center min-w-[200px]">
         <img
           onClick={toggleMenuHandler}
-          className="h-8 cursor-pointer"
+          className="h-7 mr-4 cursor-pointer"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_ReeS5Zn86e8s2K8UfnHkPRbTIdB0IYre6kDMlWDmQskvjQWI4OVmX3V5n5VFZZ98NaA&usqp=CAU"
           alt="menu"
         />
         <a href="/">
           <img
-            className="h-8 mx-2"
+            className="h-7"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfnDBkNofkaZMvpZ42PyxDtYLNt3K4WCnkkkefrwLpRL0ILT21GUEK7U-_mYI1qZboGQ&usqp=CAU"
             alt="logo"
           />
@@ -74,34 +74,35 @@ const handleSearch = () =>{
       </div>
 
       {/* Center */}
-      <div className="col-span-10 px-10 relative">
-        <input
-          className="w-1/2 border border-gray-300 p-2 rounded-l-full focus:outline-none"
-          type="text"
-          placeholder="Search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onFocus={() => setShowSuggestions(true)}
-          onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          onKeyDown={(e)=>{
-            if(e.key === "Enter") handleSearch();
+      <div className="flex-1 flex justify-center relative">
+        <div className="flex w-full max-w-xl">
+          <input
+            className="w-full border border-gray-300 p-2 rounded-l-full focus:outline-none text-sm"
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={() => setShowSuggestions(true)}
+            onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+            onKeyDown={(e)=>{
+              if(e.key === "Enter") handleSearch();
+              }
             }
-          }
-        />
-        <button className="border border-gray-400 p-2 rounded-r-full bg-gray-100" onClick={handleSearch}>
-        🔍
-        </button>
-
+          />
+          <button className="border border-gray-300 border-l-0 px-4 rounded-r-full bg-gray-100 hover:bg-gray-200 transition" onClick={handleSearch}>
+            <span role="img" aria-label="search">🔍</span>
+          </button>
+        </div>
         {/* Suggestions Dropdown */}
         {showSuggestions && suggestions.length > 0 && (
-          <div className="absolute bg-white w-[50%] border border-gray-200 rounded-lg shadow-md mt-1 max-h-60 overflow-y-auto">
+          <div className="absolute left-0 top-12 bg-white w-full max-w-xl border border-gray-200 rounded-lg shadow-md mt-1 max-h-60 overflow-y-auto">
             {suggestions.map((sug, index) => (
               <div
                 key={index}
                 className="p-2 text-sm hover:bg-gray-100 cursor-pointer"
                 onMouseDown={() => setSearchQuery(sug)}
               >
-                🔍 {sug}
+                <span role="img" aria-label="search">🔍</span> {sug}
               </div>
             ))}
           </div>
@@ -109,14 +110,14 @@ const handleSearch = () =>{
       </div>
 
       {/* Right */}
-      <div className="col-span-1 flex items-center justify-end">
+      <div className="flex items-center min-w-[60px] justify-end">
         <img
-          className="h-8"
+          className="h-8 w-8 rounded-full border border-gray-200"
           src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
           alt="user"
         />
       </div>
-    </div>
+    </header>
   );
 };
 

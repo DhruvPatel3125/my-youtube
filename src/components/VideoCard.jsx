@@ -11,7 +11,7 @@ const VideoCard = ({ video }) => {
 
   return (
     <Link to={`/watch?v=${videoId}`} className="block">
-      <div className='p-2 m-2 w-72 shadow-lg'>
+      <div className='p-2 m-2 w-72 shadow-lg h-auto'>
         <img className='rounded-lg' alt='video' src={thumbnails.medium.url} />
         <ul>
           <li className='font-bold py-2'>{title}</li>

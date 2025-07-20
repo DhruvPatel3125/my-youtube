@@ -33,7 +33,7 @@ const LiveChat = () => {
           ))}
         </div>
       </div>
-      <form className="w-full ml-2 border border-black" onSubmit={(e)=>{
+      <form className="w-full ml-2 border-t border-gray-200 flex items-center gap-2 p-2 bg-white" onSubmit={(e)=>{
         e.preventDefault()
         console.log("ON FORM SUBMIT",livemessage)
         dispatch(addMessage({
@@ -43,14 +43,14 @@ const LiveChat = () => {
         setLivemessage("")
       }}>
         <input
-          className=" px-2 w-96"
+          className="flex-1 px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gray-50 text-sm"
           type="text"
           value={livemessage}
           onChange={(e) => {
             setLivemessage(e.target.value);
           }}
         />
-        <button type="submit" className="px-2 mx-2 bg-green-100" >Send</button>
+        <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-full font-semibold hover:bg-blue-600 transition" >Send</button>
       </form>
     </>
   );
