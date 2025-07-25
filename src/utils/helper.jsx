@@ -188,3 +188,11 @@ export function makeRandomMessage(length) {
   }
   return result;
 }
+
+
+const findPrime = num =>{
+  let i ,primes = [2,3],n=5;
+  const isPrime = n=>{
+    let i =1,p=primes[i]
+  }
+}

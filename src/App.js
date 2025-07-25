@@ -9,6 +9,7 @@ import MainContainer from './components/MainContainer'
 import WatchPage from './components/WatchPage'
 import NotFound from './components/NotFound.jsx';
 import SearchResults from './components/SearchResult.jsx';
+import Demo from './components/Demo.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const appRouter = createBrowserRouter([
       {
         path: "*", // Catch-all route for 404
         element: <NotFound />,
+      },
+      {
+        path: "/demo", // Catch-all route for 404
+        element: <Demo />,
       }
     ]
   }
