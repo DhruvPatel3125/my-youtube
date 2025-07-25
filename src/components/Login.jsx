@@ -1,18 +1,31 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../utils/firebase.jsx"; // Corrected path
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // Optionally redirect or show a success message
+      navigate("/"); // Redirect to the home page or main container after login
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setError("");
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      navigate("/"); // Redirect after Google sign-in
     } catch (err) {
       setError(err.message);
     }
@@ -53,6 +66,15 @@ function Login() {
         >
           Login
         </button>
+        <div className="mt-4 text-center">
+          <button
+            type="button"
+            onClick={handleGoogleSignIn}
+            className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
+          >
+            Sign in with Google
+          </button>
+        </div>
         {error && <div className="mt-4 text-red-500 text-center">{error}</div>}
       </form>
     </div>

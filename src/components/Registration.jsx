@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../utils/firebase.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -17,6 +19,20 @@ function Register() {
       setSuccess("Registration successful! You can now log in.");
       setEmail("");
       setPassword("");
+      navigate("/"); // Redirect after successful registration
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setError("");
+    setSuccess("");
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      setSuccess("Google registration/sign-in successful!");
+      navigate("/"); // Redirect after Google registration/sign-in
     } catch (err) {
       setError(err.message);
     }
@@ -57,6 +73,15 @@ function Register() {
         >
           Register
         </button>
+        <div className="mt-4 text-center">
+          <button
+            type="button"
+            onClick={handleGoogleSignIn}
+            className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
+          >
+            Sign up with Google
+          </button>
+        </div>
         {error && <div className="mt-4 text-red-500 text-center">{error}</div>}
         {success && <div className="mt-4 text-green-600 text-center">{success}</div>}
       </form>
