@@ -10,6 +10,8 @@ import WatchPage from './components/WatchPage'
 import NotFound from './components/NotFound.jsx';
 import SearchResults from './components/SearchResult.jsx';
 import Demo from './components/Demo.jsx'
+import Login from './components/Login.jsx'
+import Register from './components/Registration.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -33,8 +35,16 @@ const appRouter = createBrowserRouter([
         element: <NotFound />,
       },
       {
-        path: "/demo", // Catch-all route for 404
+        path: "/demo",
         element: <Demo />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       }
     ]
   }
