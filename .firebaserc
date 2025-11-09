@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "fir-fe4a8"
-  }
+    "default": "fir-fe4a8",
+    "firebase use default": "fir-fe4a8"
+  },
+  "targets": {},
+  "etags": {}
 }

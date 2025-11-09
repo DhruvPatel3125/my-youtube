@@ -43,11 +43,12 @@ const Header = () => {
     };
   }, [searchQuery]);
 
-  const fetchSuggestions = async (query) => {
-    const response = await fetch(`http://localhost:5000/suggest?q=${query}`);
-    const data = await response.json();
-    return data;
-  };
+ const fetchSuggestions = async (query) => {
+  const response = await fetch(`https://my-youtube-kadc.onrender.com/suggest?q=${query}`);
+  const data = await response.json();
+  return data;
+};
+
 
   const getSearchSuggestions = async () => {
     try {
